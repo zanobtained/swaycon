@@ -1,0 +1,42 @@
+[default]
+
+font=Noto 10
+
+text=ffffffff
+background=303030ff
+border=303030ff
+border-bottom=666666ff
+
+button-dismiss-gap=10
+button-gap=5
+button-background=303030ff
+button-margin-right=10
+
+[error]
+
+font=Noto 10
+
+text=ffffffff
+background=303030ff
+border=303030ff
+border-bottom=666666ff
+
+button-dismiss-gap=10
+button-gap=5
+button-background=5c5c5cff
+button-margin-right=10
+
+[warning]
+
+font=Noto 10
+
+text=ffffffff
+background=303030ff
+border=303030ff
+border-bottom=666666ff
+
+button-dismiss-gap=10
+button-gap=5
+button-background=5c5c5cff
+button-margin-right=10
+
