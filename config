@@ -17,23 +17,18 @@ set $term foot \
 
 set $menu bemenu-run \
           --prompt 'Run' \
-          --single-instance --bottom --ignore \
+          --single-instance --ignore \
           --line-height 28 --ch 16 --cw 2 --hp 10 \
+          --width-factor=0.8 \
+          --border 2 --bdr '#969696' \
           --fn 'pango:Noto 10' \
-          --tb '#dea383' \
-          --tf '#303030' \
-          --fb '#303030' \
-          --ff '#ffffff' \
-          --nb '#303030' \
-          --nf '#ffffff' \
-          --hb '#969696' \
-          --hf '#ffffff' \
-          --sb '#969696' \
-          --sf '#ffffff' \
-          --ab '#303030' \
-          --af '#ffffff' \
-          --scb '#969696' \
-          --scf '#ffffff'
+          --tb '#969696' --tf '#ffffff' \
+          --fb '#303030' --ff '#ffffff' \
+          --nb '#303030' --nf '#ffffff' \
+          --hb '#666666' --hf '#ffffff' \
+          --sb '#969696' --sf '#ffffff' \
+          --ab '#303030' --af '#ffffff' \
+          --scb '#969696' --scf '#ffffff'
 
 font pango:Noto 10
 
@@ -42,11 +37,16 @@ client.focused_inactive #666666 #666666 #ffffff #666666 #666666
 client.unfocused        #666666 #666666 #ffffff #666666 #666666
 client.urgent           #dea383 #dea383 #303030 #dea383 #dea383
 
+for_window [app_id=".*"] border pixel 2
+
 default_border pixel 2
 default_floating_border pixel 2
 
 gaps inner 4
 gaps outer 2
+
+seat * hide_cursor 60000
+seat * xcursor_theme default 28
 
 exec swayidle -w \
      timeout 300 '$lock' \
@@ -75,7 +75,7 @@ floating_modifier $mod normal
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+q kill
-bindsym $mod+Shift+e exit
+bindsym $mod+Shift+e exec 'killall -s SIGTERM wlsunset; swaymsg exit'
 
 # Safer approach:
 # bindsym $mod+Shift+e exec $nag \
@@ -131,7 +131,7 @@ bindsym $mod+v splitv
 
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout default
+bindsym $mod+e layout toggle
 
 bindsym $mod+f fullscreen
 bindsym $mod+space focus mode_toggle
@@ -158,8 +158,8 @@ mode "Resize" {
 bindsym Print exec $screenshot
 
 bindsym --locked XF86AudioMute        exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
-bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -2%
-bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +2%
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -3%
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +3%
 bindsym --locked XF86AudioMicMute     exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
 
 bindsym --locked XF86AudioPlay  exec playerctl play-pause
@@ -168,8 +168,8 @@ bindsym --locked XF86AudioPrev  exec playerctl previous
 bindsym --locked XF86AudioNext  exec playerctl next
 bindsym --locked XF86AudioStop  exec playerctl stop
 
-bindsym --locked XF86MonBrightnessDown exec brightnessctl set 2%-
-bindsym --locked XF86MonBrightnessUp   exec brightnessctl set 2%+
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 3%-
+bindsym --locked XF86MonBrightnessUp   exec brightnessctl set 3%+
 
 bar {
   position bottom

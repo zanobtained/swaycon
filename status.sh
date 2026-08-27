@@ -1,6 +1,5 @@
 while
-  date_status=$(date "+%F @ %H:%M %p")
-  battery_status="N/A"
+  battery_status="X% [NA]"
 
   for bat in /sys/class/power_supply/BAT*; do
     if [ -e "$bat/capacity" ]; then
@@ -19,13 +18,10 @@ while
     fi
   done
 
-  echo 'This Too Shall Pass' \
+  echo 'Sir, This too shall pass.' \
        ' | ' \
-       'Battery:' $battery_status \
-       ' | ' \
-       'Date:' $date_status \
-       ' ';
+       "We're at" $battery_status
 do
-  sleep 60
+  sleep 10
 done
 
