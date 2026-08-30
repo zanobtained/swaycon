@@ -3,8 +3,7 @@ indicator-caps-lock
 ignore-empty-password
 daemonize
 
-image=~/.config/sway/Background.png
-scaling=fill
+color=#262626ff
 
 font=Noto
 font-size=28
@@ -20,11 +19,11 @@ inside-caps-lock-color=00000000
 inside-ver-color=00000000
 inside-wrong-color=00000000
 
-ring-color=96969690
-ring-clear-color=96969690
-ring-caps-lock-color=96969690
-ring-ver-color=96969670
-ring-wrong-color=96969690
+ring-color=1793d190
+ring-clear-color=1793d190
+ring-caps-lock-color=1793d190
+ring-ver-color=1793d170
+ring-wrong-color=1793d190
 
 text-color=00000000
 text-clear-color=00000000

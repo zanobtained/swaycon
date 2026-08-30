@@ -12,30 +12,47 @@ set $nag swaynag --config ~/.config/sway/config_nag
 set $screenshot grim
 
 set $term foot \
-          -o font="Hack Nerd Font Mono:size=12" \
+          -o font="Hack Nerd Font:size=12" \
           -o pad=5x5
+
+set $col_u1 #1793d1
+set $col_u2 #266a8c
+set $col_d1 #333333
+set $col_d2 #5286a1
+set $col_t1 #e3f6ff
+set $col_b1 #262626
+
+set $ws1 " WS-1 "
+set $ws2 " WS-2 "
+set $ws3 " WS-3 "
+set $ws4 " WS-4 "
+set $ws5 " WS-5 "
+set $ws6 " WS-6 "
+set $ws7 " WS-7 "
+set $ws8 " WS-8 "
+set $ws9 " WS-9 "
 
 set $menu bemenu-run \
           --prompt 'Run' \
           --single-instance --ignore \
           --line-height 28 --ch 16 --cw 2 --hp 10 \
           --width-factor=0.8 \
-          --border 2 --bdr '#969696' \
+          --border 2 --bdr '$col_u1' \
           --fn 'pango:Noto 10' \
-          --tb '#969696' --tf '#ffffff' \
-          --fb '#303030' --ff '#ffffff' \
-          --nb '#303030' --nf '#ffffff' \
-          --hb '#666666' --hf '#ffffff' \
-          --sb '#969696' --sf '#ffffff' \
-          --ab '#303030' --af '#ffffff' \
-          --scb '#969696' --scf '#ffffff'
+          --tb '$col_u1' --tf '$col_t1' \
+          --fb '$col_d1' --ff '$col_t1' \
+          --nb '$col_d1' --nf '$col_t1' \
+          --hb '$col_u2' --hf '$col_t1' \
+          --sb '$col_u1' --sf '$col_t1' \
+          --ab '$col_d1' --af '$col_t1' \
+          --scb '$col_u1' --scf '$col_t1'
 
 font pango:Noto 10
 
-client.focused          #969696 #969696 #ffffff #969696 #969696
-client.focused_inactive #666666 #666666 #ffffff #666666 #666666
-client.unfocused        #666666 #666666 #ffffff #666666 #666666
-client.urgent           #dea383 #dea383 #303030 #dea383 #dea383
+client.focused          $col_u1 $col_u1 $col_t1 $col_u1 $col_u1
+client.focused_inactive $col_u2 $col_u2 $col_t1 $col_u2 $col_u2
+client.unfocused        $col_u2 $col_u2 $col_t1 $col_u2 $col_u2
+client.urgent           $col_d2 $col_d2 $col_d1 $col_d2 $col_d2
 
 for_window [app_id=".*"] border pixel 2
 
@@ -46,7 +63,7 @@ gaps inner 4
 gaps outer 2
 
 seat * hide_cursor 60000
-seat * xcursor_theme default 28
+seat * xcursor_theme default 24
 
 exec swayidle -w \
      timeout 300 '$lock' \
@@ -54,7 +71,7 @@ exec swayidle -w \
      resume 'swaymsg "output * power on"' \
      before-sleep '$lock'
 
-output * bg "~/.config/sway/Background.png" fill
+output * bg "$col_b1" solid_color
 output eDP-1 resolution 1920x1080 position 1920 0
 output eDP-1 scale 1.33
 
@@ -104,34 +121,32 @@ bindsym $mod+Shift+Down   move down
 bindsym $mod+Shift+Up     move up
 bindsym $mod+Shift+Right  move right
 
-bindsym $mod+1 workspace number 1
-bindsym $mod+2 workspace number 2
-bindsym $mod+3 workspace number 3
-bindsym $mod+4 workspace number 4
-bindsym $mod+5 workspace number 5
-bindsym $mod+6 workspace number 6
-bindsym $mod+7 workspace number 7
-bindsym $mod+8 workspace number 8
-bindsym $mod+9 workspace number 9
-bindsym $mod+0 workspace number 10
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
 
-bindsym $mod+Shift+1 move container to workspace number 1
-bindsym $mod+Shift+2 move container to workspace number 2
-bindsym $mod+Shift+3 move container to workspace number 3
-bindsym $mod+Shift+4 move container to workspace number 4
-bindsym $mod+Shift+5 move container to workspace number 5
-bindsym $mod+Shift+6 move container to workspace number 6
-bindsym $mod+Shift+7 move container to workspace number 7
-bindsym $mod+Shift+8 move container to workspace number 8
-bindsym $mod+Shift+9 move container to workspace number 9
-bindsym $mod+Shift+0 move container to workspace number 10
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
 
 bindsym $mod+b splith
 bindsym $mod+v splitv
 
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle
+bindsym $mod+e layout toggle split
 
 bindsym $mod+f fullscreen
 bindsym $mod+space focus mode_toggle
@@ -140,9 +155,9 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus       scratchpad show
 
-bindsym $mod+r mode "Resize"
+bindsym $mod+r mode " Resize "
 
-mode "Resize" {
+mode " Resize " {
   bindsym $left  resize shrink width 10px
   bindsym $down  resize grow height 10px
   bindsym $up    resize shrink height 10px
@@ -171,20 +186,28 @@ bindsym --locked XF86AudioStop  exec playerctl stop
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 3%-
 bindsym --locked XF86MonBrightnessUp   exec brightnessctl set 3%+
 
+bindsym --locked $mod+f2 exec pactl set-sink-volume \@DEFAULT_SINK@ -3%
+bindsym --locked $mod+f3 exec pactl set-sink-volume \@DEFAULT_SINK@ +3%
+
+bindsym --locked $mod+f5 exec brightnessctl set 3%-
+bindsym --locked $mod+f6 exec brightnessctl set 3%+
+
+
 bar {
   position bottom
   height   28
 
-  status_command .config/sway/status.sh
+  status_command /etc/sway/status.sh
+  gaps 2 5
 
   colors {
-    statusline #ffffff
-    background #303030
+    statusline $col_t1
+    background #00000000
 
-    focused_workspace  #303030ff #969696ff #ffffff
-    active_workspace   #303030ff #969696ff #ffffff
-    urgent_workspace   #303030ff #dea383ff #303030
-    inactive_workspace #303030ff #737373ff #ffffff
+    focused_workspace  #00000000 $col_u1ff $col_t1
+    active_workspace   #00000000 $col_u1ff $col_t1
+    urgent_workspace   #00000000 $col_d2ff $col_t1
+    inactive_workspace #00000000 $col_u2ff $col_t1
   }
 }
 
