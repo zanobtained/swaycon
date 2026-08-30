@@ -27,5 +27,9 @@ background = 12
 kind = "none"
 
 [theme]
+time = "cyan"
+border = "cyan"
+title = "cyan"
 greet = "cyan"
-input = "cyan"
+input = "white"
+prompt = "white"
