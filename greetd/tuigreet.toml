@@ -1,0 +1,31 @@
+[display]
+show_time = true
+greeting = "Who are you?"
+align_greeting = "center"
+
+[layout]
+width = 60
+window_padding = 2
+container_padding = 1
+prompt_padding = 1
+
+[layout.widgets]
+time_position = "top"
+status_position = "hidden"
+
+[secret]
+mode = "characters"
+characters = "*"
+
+[keybindings]
+command = 1
+sessions = 2
+power = 3
+background = 12
+
+[background]
+kind = "none"
+
+[theme]
+greet = "cyan"
+input = "cyan"
