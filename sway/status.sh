@@ -26,7 +26,10 @@ while
        ' | ' \
        "Time: $time_status" \
        ' | ' \
-       "Power: $battery_status"
+       "Power: $battery_status" \
+       ' | ' \
+       "Arch Linux  󰩸"
+
 do
   sleep 1
 done
