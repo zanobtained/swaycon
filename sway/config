@@ -10,10 +10,7 @@ set $lock swaylock --config /etc/sway/config_lock
 set $nag swaynag --config /etc/sway/config_nag
 
 set $screenshot grim
-
-set $term foot \
-          -o font="Hack Nerd Font:size=12" \
-          -o pad=5x5
+set $term foot
 
 set $menu bemenu-run \
           --prompt 'Run' \

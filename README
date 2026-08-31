@@ -1,0 +1,22 @@
+Very simple Sway WM configuration.
+
+Packages:
+- breeze
+- gtk3
+- gtk4
+- qt6
+- greetd
+- tuigreet
+- sway
+- swaybg
+- swaylock
+- swayidle
+- foot
+- grim
+- bemenu
+- brightnessctl
+- pipewire
+- pipewire-pulse
+- keyd
+- noto fonts
+- hack nerd fonts
