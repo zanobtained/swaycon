@@ -6,14 +6,29 @@ set $down j
 set $up k
 set $right l
 
-set $lock swaylock --config ~/.config/sway/config_lock
-set $nag swaynag --config ~/.config/sway/config_nag
+set $lock swaylock --config /etc/sway/config_lock
+set $nag swaynag --config /etc/sway/config_nag
 
 set $screenshot grim
 
 set $term foot \
           -o font="Hack Nerd Font:size=12" \
           -o pad=5x5
+
+set $menu bemenu-run \
+          --prompt 'Run' \
+          --single-instance --ignore \
+          --line-height 28 --ch 16 --cw 2 --hp 10 \
+          --width-factor=0.8 \
+          --border 2 --bdr '$col_u1' \
+          --fn 'pango:Noto 10' \
+          --tb '$col_u1' --tf '$col_t1' \
+          --fb '$col_d1' --ff '$col_t1' \
+          --nb '$col_d1' --nf '$col_t1' \
+          --hb '$col_u2' --hf '$col_t1' \
+          --sb '$col_u1' --sf '$col_t1' \
+          --ab '$col_d1' --af '$col_t1' \
+          --scb '$col_u1' --scf '$col_t1'
 
 set $col_u1 #1793d1
 set $col_u2 #266a8c
@@ -31,21 +46,6 @@ set $ws6 " WS-6 "
 set $ws7 " WS-7 "
 set $ws8 " WS-8 "
 set $ws9 " WS-9 "
-
-set $menu bemenu-run \
-          --prompt 'Run' \
-          --single-instance --ignore \
-          --line-height 28 --ch 16 --cw 2 --hp 10 \
-          --width-factor=0.8 \
-          --border 2 --bdr '$col_u1' \
-          --fn 'pango:Noto 10' \
-          --tb '$col_u1' --tf '$col_t1' \
-          --fb '$col_d1' --ff '$col_t1' \
-          --nb '$col_d1' --nf '$col_t1' \
-          --hb '$col_u2' --hf '$col_t1' \
-          --sb '$col_u1' --sf '$col_t1' \
-          --ab '$col_d1' --af '$col_t1' \
-          --scb '$col_u1' --scf '$col_t1'
 
 font pango:Noto 10
 
@@ -198,7 +198,7 @@ bar {
   height   28
 
   status_command /etc/sway/status.sh
-  gaps 2 5
+  gaps 5 5
 
   colors {
     statusline $col_t1
