@@ -37,15 +37,15 @@ set $col_d2 #5286a1
 set $col_t1 #e3f6ff
 set $col_b1 #262626
 
-set $ws1 " WS-1 "
-set $ws2 " WS-2 "
-set $ws3 " WS-3 "
-set $ws4 " WS-4 "
-set $ws5 " WS-5 "
-set $ws6 " WS-6 "
-set $ws7 " WS-7 "
-set $ws8 " WS-8 "
-set $ws9 " WS-9 "
+set $ws1 "1: WS-1 "
+set $ws2 "2: WS-2 "
+set $ws3 "3: WS-3 "
+set $ws4 "4: WS-4 "
+set $ws5 "5: WS-5 "
+set $ws6 "6: WS-6 "
+set $ws7 "7: WS-7 "
+set $ws8 "8: WS-8 "
+set $ws9 "9: WS-9 "
 
 font pango:Noto 10
 
@@ -199,6 +199,7 @@ bar {
 
   status_command /etc/sway/status.sh
   gaps 5 5
+  strip_workspace_numbers yes
 
   colors {
     statusline $col_t1
