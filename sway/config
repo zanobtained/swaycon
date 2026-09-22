@@ -1,5 +1,3 @@
-# Actual configuration:
-
 # xwayland disable
 
 set $mod Mod4
@@ -13,6 +11,7 @@ set $screenshot grim - | wl-copy
 set $term foot
 set $menu sh -c \
     "pgrep bemenu >/dev/null && exit; \
+    swaymsg mode 'RPROG'; \
     swaymsg 'client.focused $col_u2 $col_u2 $col_t1 $col_u2 $col_u2'; \
     bemenu-run \
     --prompt 'Run' \
@@ -28,7 +27,8 @@ set $menu sh -c \
     --sb '$col_u1' --sf '$col_t1' \
     --ab '$col_d1' --af '$col_t1' \
     --scb '$col_u1' --scf '$col_t1'; \
-    swaymsg 'client.focused $col_u1 $col_u1 $col_t1 $col_u1 $col_u1'"
+    swaymsg 'client.focused $col_u1 $col_u1 $col_t1 $col_u1 $col_u1'; \
+    swaymsg mode 'default';" \
 
 set $col_u1 #1793d1
 set $col_u2 #266a8c
@@ -38,11 +38,11 @@ set $col_d2 #5286a1
 set $col_t1 #e3f6ff
 set $col_b1 #262626
 
-set $ws1 "1: 0x5701 "
-set $ws2 "2: 0x5702 "
-set $ws3 "3: 0x5703 "
-set $ws4 "4: 0x5704 "
-set $ws5 "5: 0x5705 "
+set $ws1 "1:0x5701"
+set $ws2 "2:0x5702"
+set $ws3 "3:0x5703"
+set $ws4 "4:0x5704"
+set $ws5 "5:0x5705"
 # set $ws6 "6: 0x5706 "
 # set $ws7 "7: 0x5707 "
 # set $ws8 "8: 0x5708 "
@@ -151,9 +151,13 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus       scratchpad show
 
-bindsym $mod+r mode " Resize "
+bindsym $mod+r mode "RWIND"
 
-mode " Resize " {
+mode "RPROG" {
+  bindsym $mod+Escape exec pkill bemenu, mode "default"
+}
+
+mode "RWIND" {
   bindsym $left  resize shrink width 10px
   bindsym $down  resize grow height 10px
   bindsym $up    resize shrink height 10px
@@ -188,6 +192,7 @@ bindsym --locked $mod+f3 exec pactl set-sink-volume \@DEFAULT_SINK@ +3%
 bindsym --locked $mod+f5 exec brightnessctl set 3%-
 bindsym --locked $mod+f6 exec brightnessctl set 3%+
 
+
 bar {
   font pango:Noto 10
 
@@ -202,6 +207,7 @@ bar {
     statusline $col_t1
     background #00000000
 
+    binding_mode       #00000000 #00000000 $col_t1
     focused_workspace  #00000000 $col_u1ff $col_t1
     active_workspace   #00000000 $col_u1ff $col_t1
     urgent_workspace   #00000000 $col_d2ff $col_t1
