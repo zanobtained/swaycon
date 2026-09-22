@@ -1,4 +1,6 @@
-xwayland disable
+# Actual configuration:
+
+# xwayland disable
 
 set $mod Mod4
 set $left h
@@ -6,45 +8,45 @@ set $down j
 set $up k
 set $right l
 
-set $lock swaylock --config /etc/sway/config_lock
-set $nag swaynag --config /etc/sway/config_nag
-
-set $screenshot grim
+set $lock swaylock --config /etc/sway/swaylock-config
+set $screenshot grim - | wl-copy
 set $term foot
-
-set $menu bemenu-run \
-          --prompt 'Run' \
-          --single-instance --ignore \
-          --line-height 28 --ch 16 --cw 2 --hp 10 \
-          --width-factor=0.8 \
-          --border 2 --bdr '$col_u1' \
-          --fn 'pango:Noto 10' \
-          --tb '$col_u1' --tf '$col_t1' \
-          --fb '$col_d1' --ff '$col_t1' \
-          --nb '$col_d1' --nf '$col_t1' \
-          --hb '$col_u2' --hf '$col_t1' \
-          --sb '$col_u1' --sf '$col_t1' \
-          --ab '$col_d1' --af '$col_t1' \
-          --scb '$col_u1' --scf '$col_t1'
+set $menu sh -c \
+    "pgrep bemenu >/dev/null && exit; \
+    swaymsg 'client.focused $col_u2 $col_u2 $col_t1 $col_u2 $col_u2'; \
+    bemenu-run \
+    --prompt 'Run' \
+    --single-instance --ignore \
+    --line-height 28 --ch 16 --cw 2 --hp 10 \
+    --width-factor=0.9 \
+    --border 2 --bdr '$col_u1' \
+    --fn 'pango:Noto 10' \
+    --tb '$col_u1' --tf '$col_t1' \
+    --fb '$col_d1' --ff '$col_t1' \
+    --nb '$col_d1' --nf '$col_t1' \
+    --hb '$col_u3' --hf '$col_t1' \
+    --sb '$col_u1' --sf '$col_t1' \
+    --ab '$col_d1' --af '$col_t1' \
+    --scb '$col_u1' --scf '$col_t1'; \
+    swaymsg 'client.focused $col_u1 $col_u1 $col_t1 $col_u1 $col_u1'"
 
 set $col_u1 #1793d1
 set $col_u2 #266a8c
+set $col_u3 #4d4d4d
 set $col_d1 #333333
 set $col_d2 #5286a1
 set $col_t1 #e3f6ff
 set $col_b1 #262626
 
-set $ws1 "1: WS-1 "
-set $ws2 "2: WS-2 "
-set $ws3 "3: WS-3 "
-set $ws4 "4: WS-4 "
-set $ws5 "5: WS-5 "
-set $ws6 "6: WS-6 "
-set $ws7 "7: WS-7 "
-set $ws8 "8: WS-8 "
-set $ws9 "9: WS-9 "
-
-font pango:Noto 10
+set $ws1 "1: 0x5701 "
+set $ws2 "2: 0x5702 "
+set $ws3 "3: 0x5703 "
+set $ws4 "4: 0x5704 "
+set $ws5 "5: 0x5705 "
+# set $ws6 "6: 0x5706 "
+# set $ws7 "7: 0x5707 "
+# set $ws8 "8: 0x5708 "
+# set $ws9 "9: 0x5709 "
 
 client.focused          $col_u1 $col_u1 $col_t1 $col_u1 $col_u1
 client.focused_inactive $col_u2 $col_u2 $col_t1 $col_u2 $col_u2
@@ -52,6 +54,7 @@ client.unfocused        $col_u2 $col_u2 $col_t1 $col_u2 $col_u2
 client.urgent           $col_d2 $col_d2 $col_d1 $col_d2 $col_d2
 
 for_window [app_id=".*"] border pixel 2
+for_window [app_id=".*"] title_format "  _"
 
 default_border pixel 2
 default_floating_border pixel 2
@@ -91,14 +94,10 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+e exec 'killall -s SIGTERM wlsunset; swaymsg exit'
 
-# Safer approach:
-# bindsym $mod+Shift+e exec $nag \
-#                           -t default \
-#                           -m "Press 'Exit' to exit this session." \
-#                           -B 'Exit' 'swaymsg exit'
-
 bindsym $mod+d      exec $menu
-bindsym $mod+Return exec $term
+#bindsym $mod+Return exec $term
+bindsym $mod+Return exec swaymsg split h && $term
+bindsym $mod+Shift+Return exec swaymsg split v && $term
 
 bindsym $mod+$left  focus left
 bindsym $mod+$down  focus down
@@ -123,10 +122,10 @@ bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
 bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
+# bindsym $mod+6 workspace $ws6
+# bindsym $mod+7 workspace $ws7
+# bindsym $mod+8 workspace $ws8
+# bindsym $mod+9 workspace $ws9
 
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
@@ -138,12 +137,12 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 
-bindsym $mod+b splith
-bindsym $mod+v splitv
+# bindsym $mod+b splith
+# bindsym $mod+v splitv
 
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+# bindsym $mod+s layout stacking
+# bindsym $mod+w layout tabbed
+# bindsym $mod+e layout toggle split
 
 bindsym $mod+f fullscreen
 bindsym $mod+space focus mode_toggle
@@ -189,8 +188,9 @@ bindsym --locked $mod+f3 exec pactl set-sink-volume \@DEFAULT_SINK@ +3%
 bindsym --locked $mod+f5 exec brightnessctl set 3%-
 bindsym --locked $mod+f6 exec brightnessctl set 3%+
 
-
 bar {
+  font pango:Noto 10
+
   position bottom
   height   28
 
